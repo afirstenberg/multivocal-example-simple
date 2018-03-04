@@ -8,7 +8,7 @@ var enColor = [
     Template: {
       Ssml: [
         "I don't know, I agree with you that {{favoriteColor}} ",
-        "is nicer than {{color}}"
+        "is nicer than {{color}}."
       ]
     }
   }
@@ -16,7 +16,7 @@ var enColor = [
 
 var enBlue = [
   "{{color}} is my absolute favorite color.",
-  "I think there is something so striking about {{color}}"
+  "I think there is something so striking about {{color}}."
 ];
 
 var config = {
@@ -37,15 +37,18 @@ var Util       = require('multivocal/lib/util');
 
 var buildEnvColor = function( env ){
 
-  console.log('Parameter',env.Parameter);
+  // What color did the user mention
   var color = Util.objPath( env, 'Parameter/color');
 
+  // What have they previously told us their favorite color was?
   var favoriteColor = Util.objPath( env, 'User/State/favoriteColor' );
   if( !favoriteColor && color ){
+    // They didn't have a favorite color set, so remember this
     favoriteColor = color;
     Util.setObjPath( env, 'User/State/favoriteColor', favoriteColor );
   }
 
+  // Store these in the environment
   env.color = color;
   env.favoriteColor = favoriteColor;
 
@@ -53,6 +56,7 @@ var buildEnvColor = function( env ){
 };
 
 var handleColor = function( env ){
+  // Set our outent name based on the color they sent
   var color = env.color;
   Util.setObjPath( env, 'Outent', `Outent.color.${color}` );
 
