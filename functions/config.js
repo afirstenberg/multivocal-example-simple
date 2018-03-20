@@ -3,7 +3,7 @@ var localUndResponseDefault = [
   {
     ShouldClose: true,
     Template:{
-      Ssml: "I seem to be a little confused."
+      Text: "I seem to be a little confused."
     }
   }
 ];
@@ -18,13 +18,13 @@ var enWelcome = [
   {
     Criteria: "{{gt User.State.NumVisits 3}}",
     Template: {
-      Ssml: "This is your {{ordinalize User.State.NumVisits}} visit to Color Chat."
+      Text: "This is your {{ordinalize User.State.NumVisits}} visit to Color Chat."
     }
   },
   {
     Criteria: "{{gt User.State.NumVisits 5}}",
     Template: {
-      Ssml: [
+      Text: [
         "Wow! This is your {{ordinalize User.State.NumVisits}} visit to Color Chat. ",
         "Great to see you again."
       ]
@@ -46,6 +46,11 @@ var enUnknown = [
   "I didn't hear a color. Hope you come back to play later."
 ];
 
+var enRepeat = [
+  "Sorry about that, let me try again.",
+  "I said:"
+];
+
 var enQuit = [
   "Thanks for visiting! Hope to see you again.",
   "Hope you had fun. Let's do this again sometime.",
@@ -61,9 +66,10 @@ var conf = {
   Local: {
     en: {
       Response: {
-        "Action.welcome":       enWelcome,
-        "Action.input.unknown": enUnknown,
-        "Action.quit":          enQuit
+        "Action.multivocal.welcome": enWelcome,
+        "Action.multivocal.unknown": enUnknown,
+        "Action.multivocal.repeat":  enRepeat,
+        "Action.multivocal.quit":    enQuit
       },
       Suffix: {
         Default: enSuffix
@@ -77,15 +83,6 @@ var conf = {
   }
 };
 
-var Simple = require('multivocal/lib/config-simple');
-var Config = Simple(conf);
-var ConfigStandard = Simple(require('multivocal/config/config-standard'));
-
-//Config.get().then( o => console.log( 'Config', JSON.stringify(o, null, 1 ) ) );
-//ConfigStandard.get().then( o => console.log( 'ConfigStandard', JSON.stringify(o, null, 1 ) ) );
-
-module.exports = require('multivocal/lib/config-merge')([
-  require('./color' ).config,
-  Config,
-  ConfigStandard
-]);
+const Multivocal = require('multivocal');
+var Config = new Multivocal.Config.Simple(conf);
+module.exports = Config;

@@ -6,7 +6,7 @@ var enColor = [
   {
     Criteria: "{{not (eq color favoriteColor)}}",
     Template: {
-      Ssml: [
+      Text: [
         "I don't know, I agree with you that {{favoriteColor}} ",
         "is nicer than {{color}}."
       ]
@@ -29,8 +29,6 @@ var config = {
     }
   }
 };
-exports.config = require('multivocal/lib/config-simple')( config );
-
 
 var Multivocal = require('multivocal');
 var Util       = require('multivocal/lib/util');
@@ -64,6 +62,11 @@ var handleColor = function( env ){
 };
 
 exports.init = function(){
+  // Load / register our configurations
+  require('./config' );
+  new Multivocal.Config.Simple( config );
+
+  // Register functions
   Multivocal.addBuilder( buildEnvColor );
   Multivocal.addActionHandler( 'color', handleColor );
 };
