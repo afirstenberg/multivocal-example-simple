@@ -1,7 +1,7 @@
 {
   "name": "multivocal-example-simple",
   "description": "Simple example for the multivocal library",
-  "version": "1.0.0",
+  "version": "0.6.0",
   "scripts": {
     "serve": "firebase serve --only functions",
     "shell": "firebase experimental:functions:shell",
@@ -12,7 +12,7 @@
   "dependencies": {
     "firebase-admin": "~5.4.2",
     "firebase-functions": "^0.7.1",
-    "multivocal": "^0.0.6"
+    "multivocal": "^0.6.0"
   },
   "private": true
 }

@@ -80,7 +80,8 @@ var conf = {
         Default: localUndResponseDefault
       }
     }
-  }
+  },
+  Package: require('./package.json')
 };
 
 const Multivocal = require('multivocal');
