@@ -8,21 +8,20 @@ var localUndResponseDefault = [
   }
 ];
 
-var enWelcome = [
-  {Base:{Ref: 'Config/BaseLib/Welcome/First'}},
-  "Welcome to Color Chat! We'll be talking about colors. What is your favorite?",
+var enWelcomeFirst = [
+  "Welcome to Color Chat! We'll be talking about colors. What is your favorite?"
+];
 
-  {Base:{Ref: 'Config/BaseLib/Welcome/Returning'}},
+var enWelcomeNewbie = [
   "Welcome back to Color Chat.",
   "Good to have you back at Color Chat.",
+];
+
+var enWelcome = [
+  "This is your {{ordinalize User.State.NumVisits}} visit to Color Chat.",
+
   {
-    Criteria: "{{gt User.State.NumVisits 3}}",
-    Template: {
-      Text: "This is your {{ordinalize User.State.NumVisits}} visit to Color Chat."
-    }
-  },
-  {
-    Criteria: "{{gt User.State.NumVisits 5}}",
+    Criteria: "{{gt User.State.NumVisits 10}}",
     Template: {
       Text: [
         "Wow! This is your {{ordinalize User.State.NumVisits}} visit to Color Chat. ",
@@ -32,16 +31,21 @@ var enWelcome = [
   }
 ];
 
-var enUnknown = [
-  {Base:{Ref: 'Config/BaseLib/Unknown/First'}},
+var enUnknown1 = [
   "I'm sorry, I didn't get that.",
   "Can you repeat that? I didn't understand.",
+];
 
-  {Base:{Ref: 'Config/BaseLib/Unknown/Repeat'}},
+var enUnknown2 = [
   "I'm sorry, but we were talking about colors, and I'm not sure I understand.",
   "I didn't hear a color there. Can you try that again please.",
+];
 
-  {Base:{Ref: 'Config/BaseLib/Unknown/Final'}},
+var enUnknown = [
+  {
+    Base: {Set:true},
+    ShouldClose: true
+  },
   "I still didn't hear anything. Perhaps another time.",
   "I didn't hear a color. Hope you come back to play later."
 ];
@@ -66,10 +70,14 @@ var conf = {
   Local: {
     en: {
       Response: {
-        "Action.multivocal.welcome": enWelcome,
-        "Action.multivocal.unknown": enUnknown,
-        "Action.multivocal.repeat":  enRepeat,
-        "Action.multivocal.quit":    enQuit
+        "Action.multivocal.welcome.1": enWelcomeFirst,
+        "Action.multivocal.welcome.2": enWelcomeNewbie,
+        "Action.multivocal.welcome":   enWelcome,
+        "Action.multivocal.unknown.1": enUnknown1,
+        "Action.multivocal.unknown.2": enUnknown2,
+        "Action.multivocal.unknown":   enUnknown,
+        "Action.multivocal.repeat":    enRepeat,
+        "Action.multivocal.quit":      enQuit
       },
       Suffix: {
         Default: enSuffix
