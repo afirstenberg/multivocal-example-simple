@@ -1,0 +1,90 @@
+{
+ "Local": {
+  "en": {
+   "Response": {
+    "Action.welcome.1": [
+     "Welcome to Color Chat! We'll be talking about colors. What is your favorite?"
+    ],
+    "Action.welcome.2": [
+     "Welcome back to Color Chat.",
+     "Good to have you back at Color Chat."
+    ],
+    "Action.welcome": [
+     "This is your {{ordinalize User.State.NumVisits}} visit to Color Chat.",
+     {
+      "Criteria": "{{gt User.State.NumVisits 10}}",
+      "Template": {
+       "Text": [
+        "Wow! This is your {{ordinalize User.State.NumVisits}} visit to Color Chat. ",
+        "Great to see you again."
+       ]
+      }
+     }
+    ],
+    "Action.unknown.1": [
+     "I'm sorry, I didn't get that.",
+     "Can you repeat that? I didn't understand."
+    ],
+    "Action.unknown.2": [
+     "I'm sorry, but we were talking about colors, and I'm not sure I understand.",
+     "I didn't hear a color there. Can you try that again please."
+    ],
+    "Action.unknown": [
+     {
+      "Base": {
+       "Set": true
+      },
+      "ShouldClose": true
+     },
+     "I still didn't hear anything. Perhaps another time.",
+     "I didn't hear a color. Hope you come back to play later."
+    ],
+    "Action.repeat": [
+     "Sorry about that, let me try again.",
+     "I said:"
+    ],
+    "Action.quit": [
+     "Thanks for visiting! Hope to see you again.",
+     "Hope you had fun. Let's do this again sometime.",
+     "That was great. Don't be a stranger!"
+    ],
+    "Action.color": [
+     "{{color}} is one of my favorite colors as well.",
+     "Oh yes, {{color}} can be quite striking.",
+     "I can certainly understand why you like {{color}}.",
+     {
+      "Criteria": "{{not (eq color favoriteColor)}}",
+      "Template": {
+       "Text": [
+        "I don't know, I agree with you that {{favoriteColor}} ",
+        "is nicer than {{color}}."
+       ]
+      }
+     }
+    ],
+    "Outent.color.blue": [
+     "{{color}} is my absolute favorite color.",
+     "I think there is something so striking about {{color}}."
+    ]
+   },
+   "Suffix": {
+    "Default": [
+     "What other color are you thinking about?",
+     "Tell me another color."
+    ]
+   }
+  },
+  "und": {
+   "Response": {
+    "Default": [
+     {
+      "ShouldClose": true,
+      "Template": {
+       "Text": "I seem to be a little confused."
+      }
+     }
+    ]
+   }
+  }
+ }
+}
